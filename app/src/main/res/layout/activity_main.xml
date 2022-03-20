@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="?attr/colorPrimary"
+            android:background="@color/lemon"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:title=" "
@@ -46,7 +46,7 @@
                 android:layout_marginStart="10dp"
                 android:textSize="22sp"
                 android:text="@string/app_name"
-                android:textColor="#FFF"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/app_logo"/>
@@ -70,9 +70,10 @@
         android:layout_height="?actionBarSize"
         android:id="@+id/tab_layout"
         app:tabInlineLabel="true"
-        android:background="@color/teal_700"
-        app:tabTextColor="@color/white"
-        app:tabIndicatorColor="@color/white"
+        android:background="@color/white"
+        app:tabTextColor="@color/gray"
+        app:tabIconTintMode="multiply"
+        app:tabIndicatorColor="@color/lemon"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"/>
 
