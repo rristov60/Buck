@@ -40,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
-        arrayList.add("Basic");
-        arrayList.add("Advance");
-        arrayList.add("Pro");
+        arrayList.add("Services");
+        arrayList.add("Fun");
+        arrayList.add("Industry");
+        arrayList.add("Education");
 
         tabLayout.setupWithViewPager(viewPager);
-
         prepareViewPager(viewPager, arrayList);
+
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
         ArrayList<String> stringArrayList = new ArrayList<>();
-        int[] imageList = { R.drawable.ic_basic, R.drawable.ic_advance, R.drawable.ic_pro };
+        int[] imageList = { R.drawable.ic_services, R.drawable.ic_fun, R.drawable.ic_industry,  R.drawable.ic_education };
 
         public void addFragment(Fragment fragment, String s) {
             fragmentArrayList.add(fragment);
