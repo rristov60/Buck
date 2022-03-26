@@ -47,7 +47,18 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
         prepareViewPager(viewPager, arrayList);
+//        this.addPages();
+    }
 
+    private void addPages(){
+        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new FunFragment());
+        pagerAdapter.addFragment(new FunFragment());
+        pagerAdapter.addFragment(new FunFragment());
+        pagerAdapter.addFragment(new FunFragment());
+//        pagerAdapter.addFragment(new MainFragment());
+
+        viewPager.setAdapter(pagerAdapter);
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
@@ -58,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("title", arrayList.get(i));
             mainFragment.setArguments(bundle);
-            adapter.addFragment(mainFragment, arrayList.get(i));
+            adapter.addFragment(new FunFragment(), arrayList.get(i));
 
             mainFragment = new MainFragment();
         }
