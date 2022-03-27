@@ -1,13 +1,13 @@
 package mk.riste.buck;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,6 +52,8 @@ public class CustomAdapter extends BaseAdapter {
         String name = businesses.get(position).getName();
         int image = businesses.get(position).getImage();
 
+        Business theBusiness = businesses.get(position);
+
         nameTxt.setText(name);
         img.setImageResource(image);
 
@@ -59,7 +61,29 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 // Launch activity to see the business information
-                Toast.makeText(c, name, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(c, ViewBusiness.class);
+
+//                name = b.getString("name");
+//                address = b.getString("address");
+//                latitude = b.getDouble("latitude");
+//                longitude = b.getDouble("longitude");
+//                eMail = b.getString("eMail");
+//                telephone = b.getString("telephone");
+//                webSite = b.getString("webSite");
+//                description = b.getString("description");
+//                image = b.getInt("image"); // this might be changed to string later, we will see
+                intent.putExtra("name", theBusiness.getName());
+                intent.putExtra("address", theBusiness.getAddress());
+                intent.putExtra("latitude", theBusiness.getLatitude());
+                intent.putExtra("longitude", theBusiness.getLongitude());
+                intent.putExtra("eMail", theBusiness.geteMail());
+                intent.putExtra("telephone", theBusiness.getTelephone());
+                intent.putExtra("webSite", theBusiness.getWebSite());
+                intent.putExtra("image", theBusiness.getImage());
+                intent.putExtra("description", theBusiness.getDescription());
+
+
+                c.startActivity(intent);
             }
         });
 

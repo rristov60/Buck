@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class FunFragment extends Fragment {
@@ -20,67 +21,27 @@ public class FunFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_fun, container, false);
         ListView lv = rootView.findViewById(R.id.funList);
-        CustomAdapter adapter = new CustomAdapter(this.getActivity(), getFunBusinesses());
+        CustomAdapter adapter = null;
+        try {
+            adapter = new CustomAdapter(this.getActivity(), getFunBusinesses());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         lv.setAdapter(adapter);
         return rootView;
     }
 
-    private ArrayList<Business> getFunBusinesses() {
-        // Get from mongo
+    private ArrayList<Business> getFunBusinesses() throws UnknownHostException {
+//        // Get from mongo
         ArrayList<Business> businesses = new ArrayList<>();
-
-        Business business1 = new Business("Riste Business", "Copernicus",
+        Business business1 = new Business("Riste Business", "Copernicus", "",
                 29.22, 34.55,
                 "ristov@riste.mk", "+389 70 000 000", "riste.mk", Category.Fun, R.drawable.ic_fun);
-        Business business2 = new Business("Ivan Business", "Copernicus",
+        Business business2 = new Business("Ivan Business", "Copernicus", "",
                 43.12, 44.25,
                 "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business3 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business4 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business5 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business6 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business7 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business8 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business9 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business10 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business11 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        Business business12 = new Business("Ivan Business", "Copernicus",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-
-
         businesses.add(business1);
         businesses.add(business2);
-        businesses.add(business3);
-        businesses.add(business4);
-        businesses.add(business5);
-        businesses.add(business6);
-        businesses.add(business7);
-        businesses.add(business8);
-        businesses.add(business9);
-        businesses.add(business10);
-        businesses.add(business11);
-        businesses.add(business12);
-
-
         return businesses;
     }
 

@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buck">
         <activity
-            android:name=".AddBusinessActivity"
+            android:name=".ViewBusiness"
             android:exported="false" />
-        <!-- <meta-data -->
+        <activity
+            android:name=".AddBusinessActivity"
+            android:exported="false" /> <!-- <meta-data -->
         <!-- android:name="com.google.android.actions" -->
         <!-- /> -->
         <activity
