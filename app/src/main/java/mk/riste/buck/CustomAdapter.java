@@ -58,6 +58,7 @@ public class CustomAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Launch activity to see the business information
                 Toast.makeText(c, name, Toast.LENGTH_SHORT).show();
             }
         });

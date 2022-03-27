@@ -26,6 +26,7 @@ public class FunFragment extends Fragment {
     }
 
     private ArrayList<Business> getFunBusinesses() {
+        // Get from mongo
         ArrayList<Business> businesses = new ArrayList<>();
 
         Business business1 = new Business("Riste Business", "Copernicus",
