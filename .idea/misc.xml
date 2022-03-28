@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_services.xml" value="0.203" />
         <entry key="app/src/main/res/layout/activity_add_business.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_view_business.xml" value="0.33" />
         <entry key="app/src/main/res/layout/add_fragment.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.21014492753623187" />
         <entry key="app/src/main/res/layout/fragment_education.xml" value="0.21014492753623187" />

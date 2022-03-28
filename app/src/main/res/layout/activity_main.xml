@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/lemon"
+            android:background="@color/tangerine"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:title=" "
@@ -73,7 +73,7 @@
         android:background="@color/white"
         app:tabTextColor="@color/gray"
         app:tabIconTintMode="multiply"
-        app:tabIndicatorColor="@color/lemon"
+        app:tabIndicatorColor="@color/tangerine"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"/>
 

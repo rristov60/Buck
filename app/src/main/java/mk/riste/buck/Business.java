@@ -3,6 +3,7 @@ package mk.riste.buck;
 public class Business {
     String name;
     String address;
+    String description;
     double latitude;
     double longitude;
     String eMail;
@@ -12,12 +13,13 @@ public class Business {
     int image;
 
 
-    public Business(String name, String address, double latitude, double longitude,
+    public Business(String name, String address, String description, double latitude, double longitude,
                     String eMail, String telephone, String webSite, Category category,
                     int image) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;
+        this.description = description;
         this.longitude = longitude;
         this.eMail = eMail;
         this.telephone = telephone;
@@ -61,6 +63,8 @@ public class Business {
     public int getImage() {
         return image;
     }
+
+    public String getDescription() { return description; }
 }
 
  enum Category{
