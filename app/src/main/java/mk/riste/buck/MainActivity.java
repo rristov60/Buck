@@ -3,6 +3,7 @@ package mk.riste.buck;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addButton = findViewById(R.id.add_btn);
@@ -66,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void addPages(){
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new FunFragment());
-        pagerAdapter.addFragment(new FunFragment());
-        pagerAdapter.addFragment(new FunFragment());
-        pagerAdapter.addFragment(new FunFragment());
+        SQLDB sqldb = new SQLDB();
+        ArrayList<Business> businesses = sqldb.getBusiness();
+        pagerAdapter.addFragment(new FunFragment(businesses));
+        pagerAdapter.addFragment(new FunFragment(businesses));
+        pagerAdapter.addFragment(new FunFragment(businesses));
+        pagerAdapter.addFragment(new FunFragment(businesses));
 //        pagerAdapter.addFragment(new MainFragment());
 
         viewPager.setAdapter(pagerAdapter);
@@ -79,11 +85,27 @@ public class MainActivity extends AppCompatActivity {
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());
         MainFragment mainFragment = new MainFragment();
 
+        SQLDB sqldb = new SQLDB();
+        ArrayList<Business> businesses = sqldb.getBusiness();
+
         for (int i = 0; i < arrayList.size(); i++) {
             Bundle bundle = new Bundle();
             bundle.putString("title", arrayList.get(i));
             mainFragment.setArguments(bundle);
-            adapter.addFragment(new FunFragment(), arrayList.get(i));
+            switch (i) {
+                case 0:
+                    adapter.addFragment(new ServicesFragment(businesses), arrayList.get(i));
+                    break;
+                case 1:
+                    adapter.addFragment(new FunFragment(businesses), arrayList.get(i));
+                    break;
+                case 2:
+                    adapter.addFragment(new IndustryFragment(businesses), arrayList.get(i));
+                    break;
+                case 3:
+                    adapter.addFragment(new EducationFragment(businesses), arrayList.get(i));
+                    break;
+            }
 
             mainFragment = new MainFragment();
         }

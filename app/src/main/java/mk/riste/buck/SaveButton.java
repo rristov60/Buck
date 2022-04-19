@@ -38,7 +38,7 @@ public class SaveButton {
         progressBarSave.setVisibility(View.GONE);
 //        textViewSave.setTypeface(null, Typeface.BOLD);
         textViewSave.setAnimation(fade_in);
-        textViewSave.setText("SAVED!");
+        textViewSave.setText("Saved!");
         textViewSave.setVisibility(View.VISIBLE);
     }
 }

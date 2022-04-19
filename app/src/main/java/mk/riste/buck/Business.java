@@ -9,12 +9,12 @@ public class Business {
     String eMail;
     String telephone;
     String webSite;
-    Category category;
+    String category;
     int image;
 
 
     public Business(String name, String address, String description, double latitude, double longitude,
-                    String eMail, String telephone, String webSite, Category category,
+                    String eMail, String telephone, String webSite, String category,
                     int image) {
         this.name = name;
         this.address = address;
@@ -56,7 +56,7 @@ public class Business {
         return webSite;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
