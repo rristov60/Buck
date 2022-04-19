@@ -15,6 +15,12 @@ import java.util.ArrayList;
 
 public class FunFragment extends Fragment {
 
+    ArrayList<Business> businesses;
+
+    FunFragment(ArrayList<Business> businesses){
+        this.businesses = businesses;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -22,8 +28,9 @@ public class FunFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_fun, container, false);
         ListView lv = rootView.findViewById(R.id.funList);
         CustomAdapter adapter = null;
+
         try {
-            adapter = new CustomAdapter(this.getActivity(), getFunBusinesses());
+            adapter = new CustomAdapter(this.getActivity(), getFunBusinesses(businesses));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -31,17 +38,14 @@ public class FunFragment extends Fragment {
         return rootView;
     }
 
-    private ArrayList<Business> getFunBusinesses() throws UnknownHostException {
-//        // Get from mongo
-        ArrayList<Business> businesses = new ArrayList<>();
-        Business business1 = new Business("Riste Business", "Copernicus", "",
-                29.22, 34.55,
-                "ristov@riste.mk", "+389 70 000 000", "riste.mk", Category.Fun, R.drawable.ic_fun);
-        Business business2 = new Business("Ivan Business", "Copernicus", "",
-                43.12, 44.25,
-                "ivan@business.mk", "+389 71 111 111", "ivan.mk", Category.Fun, R.drawable.ic_fun);
-        businesses.add(business1);
-        businesses.add(business2);
+    private ArrayList<Business> getFunBusinesses(ArrayList<Business> allBusinesses) throws UnknownHostException {
+        // Get from Azure
+        ArrayList<Business> businesses = new ArrayList<Business>();
+        for(int i = 0; i < allBusinesses.size(); i++) {
+            if(allBusinesses.get(i).getCategory().equals("Fun")) {
+                businesses.add(allBusinesses.get(i));
+            }
+        }
         return businesses;
     }
 
