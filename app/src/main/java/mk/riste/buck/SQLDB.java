@@ -13,7 +13,7 @@ public class SQLDB {
     Connection conn;
 
     public Connection connect() {
-        String connectionURL = "";
+        String connectionURL = "jdbc:jtds:sqlserver://memorygame.database.windows.net:1433;DatabaseName=BuckDB;user=riste@memorygame;password=Ristov123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
         Connection connection = null;
 
         try{
