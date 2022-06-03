@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class SQLDB {
     Connection conn;
 
-    // ToDo: Proper Connection String
     public Connection connect() {
         String connectionURL = "";
         Connection connection = null;
@@ -28,7 +27,7 @@ public class SQLDB {
         return connection;
 
     }
-    // ToDo: Assign Random Image from ArrayList
+
     public ArrayList<Business> getBusiness() {
         conn = connect();
         if(conn != null) {
@@ -39,6 +38,25 @@ public class SQLDB {
                 ArrayList<Business> allBusinesses = new ArrayList<Business>();
 
                 while (set.next()) {
+                    String category = set.getString(9);
+                    int image = 0;
+                    switch (category) {
+                        case "Services":
+                            image = R.drawable.ic_services;
+                            break;
+                        case "Fun":
+                            image = R.drawable.ic_fun;
+                            break;
+                        case "Industry":
+                            image = R.drawable.ic_industry;
+                            break;
+                        case "Education":
+                            image = R.drawable.ic_education;
+                            break;
+                        default:
+                            image = R.drawable.ic_web;
+                            break;
+                    }
                     allBusinesses.add(new Business(
                             set.getString(2),
                             set.getString(3),
@@ -48,8 +66,8 @@ public class SQLDB {
                             set.getString(6),
                             set.getString(7),
                             set.getString(8),
-                            set.getString(9),
-                            R.drawable.ic_logo
+                            category,
+                            image
                     ));
                 }
 

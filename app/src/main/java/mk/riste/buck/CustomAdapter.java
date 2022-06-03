@@ -6,30 +6,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CustomAdapter extends BaseAdapter {
+
+public class CustomAdapter extends BaseAdapter implements Filterable {
 
     Context c;
     ArrayList<Business> businesses;
+    ArrayList<Business> filteredBusinesses;
     LayoutInflater inflater;
 
     public CustomAdapter(Context c, ArrayList<Business> businesses) {
         this.c = c;
         this.businesses = businesses;
+        this.filteredBusinesses = businesses;
     }
 
     @Override
     public int getCount() {
-        return businesses.size();
+        return filteredBusinesses.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return businesses.get(position);
+        return filteredBusinesses.get(position);
     }
 
     @Override
@@ -49,8 +55,8 @@ public class CustomAdapter extends BaseAdapter {
         TextView description = (TextView) view.findViewById(R.id.business_description);
         ImageView img = (ImageView) view.findViewById(R.id.business_image);
 
-        String name = businesses.get(position).getName();
-        int image = businesses.get(position).getImage();
+        String name = filteredBusinesses.get(position).getName();
+        int image = filteredBusinesses.get(position).getImage();
 
         Business theBusiness = businesses.get(position);
 
@@ -63,15 +69,6 @@ public class CustomAdapter extends BaseAdapter {
                 // Launch activity to see the business information
                 Intent intent = new Intent(c, ViewBusiness.class);
 
-//                name = b.getString("name");
-//                address = b.getString("address");
-//                latitude = b.getDouble("latitude");
-//                longitude = b.getDouble("longitude");
-//                eMail = b.getString("eMail");
-//                telephone = b.getString("telephone");
-//                webSite = b.getString("webSite");
-//                description = b.getString("description");
-//                image = b.getInt("image"); // this might be changed to string later, we will see
                 intent.putExtra("name", theBusiness.getName());
                 intent.putExtra("address", theBusiness.getAddress());
                 intent.putExtra("latitude", theBusiness.getLatitude());
@@ -88,5 +85,36 @@ public class CustomAdapter extends BaseAdapter {
         });
 
         return view;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+
+                if (constraint == null || constraint.length() == 0) {
+                    //no constraint given, just return all the data. (no search)
+                    results.count = businesses.size();
+                    results.values = businesses;
+                } else {//do the search
+                    List<Business> resultsData = new ArrayList<>();
+                    String searchStr = constraint.toString().toUpperCase();
+                    for (Business b : businesses)
+                        if (b.getName().toUpperCase().contains(searchStr)) resultsData.add(b);
+                    results.count = resultsData.size();
+                    results.values = resultsData;
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredBusinesses = (ArrayList<Business>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
