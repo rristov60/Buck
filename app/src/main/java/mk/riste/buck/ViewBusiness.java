@@ -1,16 +1,25 @@
 package mk.riste.buck;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-public class ViewBusiness extends AppCompatActivity {
+public class ViewBusiness extends AppCompatActivity implements LocationListener {
     String name;
     String address;
     String description;
@@ -20,7 +29,8 @@ public class ViewBusiness extends AppCompatActivity {
     String telephone;
     String webSite;
     int image;
-
+    String provider = "myLocation";
+    LocationManager locationManager;
     TextView businessName;
     TextView businessAddress;
     TextView businessDescription;
@@ -41,6 +51,11 @@ public class ViewBusiness extends AppCompatActivity {
         businessEmail = findViewById(R.id.textViewBusinessEmail);
         businessLogo = findViewById(R.id.imageViewBusinessLogo);
         viewOnGoogleMaps = findViewById(R.id.btnViewOnGoogleMaps);
+
+        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
 
         Bundle b = getIntent().getExtras();
         name = b.getString("name");
@@ -69,5 +84,19 @@ public class ViewBusiness extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onLocationChanged(Location currentLocation) {
+        Location businessLocation = new Location(name);
+        businessLocation.setLatitude(latitude);
+        businessLocation.setLongitude(longitude);
+        double distance = currentLocation.distanceTo(businessLocation);
+
+        if(distance <= 50) {
+            Toast.makeText(getApplicationContext(),
+                    "You are within 50 meters of this business location",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }
